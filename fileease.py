@@ -19,124 +19,118 @@ def main():
 
     colored_logo = click.style(logo_ascii, fg='green', bold=True)
     name = click.style('~ puang59 \n', fg='red', bold=True)
-    print(colored_logo)
-    print(name)
+    click.echo(colored_logo)
+    click.echo(name)
 
     try:
-        def folderPrompt():
-            folderPath = click.prompt('What folder do you want to organize? (path) ')
-            folderPath = os.path.expanduser(folderPath)  # Expand the ~ to the home directory
-            files = os.listdir(folderPath)
-            return folderPath, files  # Return folderPath and files
+        def folder_prompt():
+            folder_path = click.prompt('What folder do you want to organize? (path) ')
+            folder_path = os.path.expanduser(folder_path)  # Expand the ~ to the home directory
+            files = os.listdir(folder_path)
+            return folder_path, files  # Return folder_path and files
 
-        try:
-            folderPath, files = folderPrompt()
-        except FileNotFoundError as e:
-            print("Please try '~/<directory>'")
-            folderPath, files = folderPrompt()
+        folder_path, files = folder_prompt()
 
         def get_yes_no_input(question):
             while True:
                 response = click.prompt(question)
-                if response.lower() == "yes" or response.lower() == "y":
+                if response.lower() in ("yes", "y"):
                     return True
-                elif response.lower() == "no" or response.lower() == "n":
+                elif response.lower() in ("no", "n"):
                     return False
                 else:
                     print("Invalid input. Please enter 'yes' or 'no'.")
 
         while True:
-            organizeMethod = get_yes_no_input(f"Do you want keyword organizing? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
-            if organizeMethod:
+            organize_method = get_yes_no_input(f"Do you want keyword organizing? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
+            if organize_method:
                 keyword = click.prompt("Enter Keyword ")
-                masterFolderName = keyword
-                totalFiles = 0
+                master_folder_name = keyword
+                total_files = 0
                 for file in files:
                     if keyword.lower() in file.lower():
-                        totalFiles += 1
+                        total_files += 1
 
-                confirmation = get_yes_no_input(f"\n{click.style('Summary: ', fg='cyan')}\nMode -> Keyword organizing ({keyword})\nFolder -> {folderPath}\nMaster Folder -> {folderPath}/{keyword}\nFiles -> {totalFiles-1} items\n\nContinue? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
+                confirmation = get_yes_no_input(f"\n{click.style('Summary: ', fg='cyan')}\nMode -> Keyword organizing ({keyword})\nFolder -> {folder_path}\nMaster Folder -> {os.path.join(folder_path, keyword)}\nFiles -> {total_files-1} items\n\nContinue? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
                 if not confirmation:
                     print("Terminating!!")
                     return
 
                 for file in files:
                     if keyword.lower() in file.lower():  # Check if keyword is present in the file name
-                        source_path = os.path.join(folderPath, file)
-                        target_directory = os.path.join(folderPath, masterFolderName)
+                        source_path = os.path.join(folder_path, file)
+                        target_directory = os.path.join(folder_path, master_folder_name)
                         if os.path.isdir(source_path):
-                            # print(f"Skipping directory: {file}")
                             continue
-                        os.makedirs(target_directory, exist_ok=True)  # Use exist_ok to avoid errors if the directory already exists
+                        os.makedirs(target_directory, exist_ok=True)
                         shutil.move(source_path, os.path.join(target_directory, file))
-                        print(f"Moved {click.style(file, fg='magenta')} successfully")
+                        click.echo(f"Moved {click.style(file, fg='magenta')} successfully")
 
                 click.echo(f"{click.style('Done! Files are organized by keyword ;>', fg='green')}")
                 return  # Exit without asking for extensions
 
-            elif not organizeMethod:
+            elif not organize_method:
                 break
             else:
                 print("Invalid input. Please enter 'yes' or 'no'.")
 
-        extensionsPrompt = click.prompt('Extensions (example - jpg, png, gif) ')
+        extensions_prompt = click.prompt('Extensions (example - jpg, png, gif) ')
 
-        if "," in extensionsPrompt:
-            extensionsSplit = extensionsPrompt.split(',')
-            extensionsList = [f'.{ext.strip()}' for ext in extensionsSplit]  # Add a dot (.) to each extension
+        if "," in extensions_prompt:
+            extensions_split = extensions_prompt.split(',')
         else:
-            extensionsSplit = extensionsPrompt.split(' ')
-            extensionsList = [f'.{ext.strip()}' for ext in extensionsSplit]  # Add a dot (.) to each extension
+            extensions_split = extensions_prompt.split(' ')
 
-        diffFolderPrompt = get_yes_no_input(f"Do you want to create different folders for different extensions? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
-        masterFolderName = "None"
+        extensions_list = [f".{ext.strip()}" for ext in extensions_split]
 
-        if diffFolderPrompt:
-            masterFolderPrompt = get_yes_no_input(f"Do you want to create {click.style('Master Folder', fg='yellow')}? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
-            if masterFolderPrompt:
-                masterFolderName = click.prompt(f'What would be the name of your Master folder?')
-                checkMaster = os.path.join(folderPath, masterFolderName)
-                if os.path.exists(checkMaster):
-                    overwritePrompt = get_yes_no_input(
-                        f"The folder '{masterFolderName}' already exists in the directory. Do you want to use it as your Master folder? " +
+        diff_folder_prompt = get_yes_no_input(f"Do you want to create different folders for different extensions? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
+        master_folder_name = None
+
+        if diff_folder_prompt:
+            master_folder_prompt = get_yes_no_input(f"Do you want to create {click.style('Master Folder', fg='yellow')}? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
+            if master_folder_prompt:
+                master_folder_name = click.prompt("What would be the name of your Master folder?")
+                check_master = os.path.join(folder_path, master_folder_name)
+                if os.path.exists(check_master):
+                    overwrite_prompt = get_yes_no_input(
+                        f"The folder '{master_folder_name}' already exists in the directory. Do you want to use it as your Master folder? " +
                         f"({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
-                    if not overwritePrompt:
+                    if not overwrite_prompt:
                         print("Terminating!!")
                         return
                 else:
-                    os.makedirs(checkMaster)
+                    os.makedirs(check_master)
         else:
-            masterFolderName = None
+            master_folder_name = None
 
-        totalFiles = 0
+        total_files = 0
         for file in files:
             filename, extension = os.path.splitext(file)
-            if extension.lower() in extensionsList:
-                totalFiles += 1
+            if extension.lower() in extensions_list:
+                total_files += 1
 
-        confirmation = get_yes_no_input(f"\n{click.style('Summary: ', fg='cyan')}\nMode -> Extension organizing \nFolder -> {folderPath}\nMaster Folder -> {folderPath}/{masterFolderName} \nFiles -> {totalFiles} items\n\nContinue? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
+        confirmation = get_yes_no_input(f"\n{click.style('Summary: ', fg='cyan')}\nMode -> Extension organizing \nFolder -> {folder_path}\nMaster Folder -> {os.path.join(folder_path, master_folder_name)} \nFiles -> {total_files} items\n\nContinue? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
         if not confirmation:
             print("Terminating!!")
             return
 
         for file in files:
             filename, extension = os.path.splitext(file)
-            if extension.lower() in extensionsList:
-                target_directory = folderPath
-                if diffFolderPrompt:
-                    if masterFolderName:
-                        target_directory = os.path.join(folderPath, masterFolderName, extension[1:])
+            if extension.lower() in extensions_list:
+                target_directory = folder_path
+                if diff_folder_prompt:
+                    if master_folder_name:
+                        target_directory = os.path.join(folder_path, master_folder_name, extension[1:])
                     else:
-                        target_directory = os.path.join(folderPath, extension[1:])
-                os.makedirs(target_directory, exist_ok=True)  # Use exist_ok to avoid errors if the directory already exists
-                shutil.move(os.path.join(folderPath, file), os.path.join(target_directory, file))
-                print(f"Moved {click.style(file, fg='magenta')} successfully")
+                        target_directory = os.path.join(folder_path, extension[1:])
+                os.makedirs(target_directory, exist_ok=True)
+                shutil.move(os.path.join(folder_path, file), os.path.join(target_directory, file))
+                click.echo(f"Moved {click.style(file, fg='magenta')} successfully")
 
         click.echo(f"{click.style('Done! Files are organized ;>', fg='green')}")
 
     except (FileNotFoundError, PermissionError) as e:
-        diffFolderPrompt = click.prompt(
-            f"{click.style('Something went wrong!!!', fg='red')}\n\n")
+        diff_folder_prompt = click.prompt(f"{click.style('Something went wrong!!!', fg='red')}\n\n")
         click.echo(f"Traceback:\n {e}")
 
 if __name__ == '__main__':
