@@ -1,0 +1,27 @@
+#+title: Notes
+#+author: puang59
+
+* Files Organizer
+** What folder you want to organize?
+** Extensions to take care of: (common_image_formats = [
+    "JPG",
+    "JPEG",
+    "PNG",
+    "GIF",
+    "BMP",
+    "TIFF",
+    "PSD",
+    "SVG",
+    "PDF",
+    "WebP",
+    "ICO"
+]) (comma seperated)
+** Do you want me to create different folders for different extensions? (yes/no)
+*** IF No:
+    Name of the master folder?
+    (then put all the files inside it)
+*** ELSE:
+    Create folders of different extensions
+
+* Feature additions-
+Keywording organizing
