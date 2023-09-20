@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="media/Logo.png" alt="FileEase Logo" width="100">
+  <img src="media/Logo.png" alt="FileEase Logo" width="600">
 </p>
 
 <hr>
@@ -16,12 +16,12 @@ FileEase is a command-line tool designed to simplify the organization of your fi
 
 ### Keyword Mode
 <p align="left">
-  <img src="media/keywordMode.png" alt="Keyword Mode Screenshot" width="400">
+  <img src="media/keywordMode.png" alt="Keyword Mode Screenshot" width="500">
 </p>
 
 ### Extension Mode
 <p align="left">
-  <img src="media/extensionMode.png" alt="Extension Mode Screenshot" width="400">
+  <img src="media/extensionMode.png" alt="Extension Mode Screenshot" width="500">
 </p>
 
 <hr>
