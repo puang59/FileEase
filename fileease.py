@@ -24,12 +24,23 @@ def main():
 
     try:
         def folder_prompt():
-            folder_path = click.prompt('What folder do you want to organize? (path) ')
-            folder_path = os.path.expanduser(folder_path)  # Expand the ~ to the home directory
-            files = os.listdir(folder_path)
-            return folder_path, files  # Return folder_path and files
+            while True:
+                folder_path = click.prompt('What folder do you want to organize? (path) ')
+                folder_path = os.path.expanduser(folder_path)  # Expand the ~ to the home directory
+                if os.path.exists(folder_path) and os.path.isdir(folder_path):
+                    files = os.listdir(folder_path)
+                    return folder_path, files  # Return folder_path and files
+                else:
+                    print(f"The directory '{folder_path}' does not exist. Please try again.")
 
-        folder_path, files = folder_prompt()
+        try:
+            folder_path, files = folder_prompt()
+        except KeyboardInterrupt:
+            print("\nOperation canceled")
+            return
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+            return
 
         def get_yes_no_input(question):
             while True:
