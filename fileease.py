@@ -42,6 +42,7 @@ def main():
             print(f"An error occurred: {str(e)}")
             return
 
+        # Defining yes/no checks
         def get_yes_no_input(question):
             while True:
                 response = click.prompt(question)
@@ -54,6 +55,7 @@ def main():
 
         while True:
             organize_method = get_yes_no_input(f"Do you want keyword organizing? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
+            #For keyword mode 
             if organize_method:
                 keyword = click.prompt("Enter Keyword ")
                 master_folder_name = keyword
