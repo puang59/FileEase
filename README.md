@@ -1,4 +1,8 @@
-# FileEase
+<p align="left">
+  <img src="media/Logo.png" alt="FileEase Logo" width="100">
+</p>
+
+<hr>
 
 FileEase is a command-line tool designed to simplify the organization of your files. It effortlessly sorts your files based on keywords and extensions, ensuring your digital workspace is tidy and efficient.
 
@@ -11,10 +15,16 @@ FileEase is a command-line tool designed to simplify the organization of your fi
 ## Screenshots
 
 ### Keyword Mode
-![Keyword Mode](media/keywordMode.png)
+<p align="left">
+  <img src="media/keywordMode.png" alt="Keyword Mode Screenshot" width="400">
+</p>
 
 ### Extension Mode
-![Extension Mode](media/extensionMode.png)
+<p align="left">
+  <img src="media/extensionMode.png" alt="Extension Mode Screenshot" width="400">
+</p>
+
+<hr>
 
 ## Getting Started
 
