@@ -97,7 +97,8 @@ def main():
         extensions_list = [f".{ext.strip()}" for ext in extensions_split]
 
         diff_folder_prompt = get_yes_no_input(f"Do you want to create different folders for different extensions? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
-        master_folder_name = None
+        # master_folder_name = None
+        master_folder_name = ""
 
         if diff_folder_prompt:
             master_folder_prompt = get_yes_no_input(f"Do you want to create {click.style('Master Folder', fg='yellow')}? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
