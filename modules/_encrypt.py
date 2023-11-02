@@ -13,6 +13,8 @@ cipher_suite = Fernet(key)
 def encrypt():
     try:
         # Ask the user for the directory containing the file
+
+        click.echo(click.style('\n2) Encrypt Files', fg='magenta', bold=True))
         directory = click.prompt('Enter the directory containing the file to encrypt', type=click.Path(exists=False, file_okay=False, dir_okay=True))
         directory = os.path.expanduser(directory)  # Expand the ~ to the home directory
 

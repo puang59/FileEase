@@ -8,6 +8,8 @@ import zipfile
 def compress():
     try:
         # Ask the user for the directory containing the files to compress
+
+        click.echo(click.style('\n4) Compress Files', fg='magenta', bold=True))
         directory = click.prompt('Enter the directory containing the files to compress', type=click.Path(exists=False, file_okay=False, dir_okay=True))
         directory = os.path.expanduser(directory)  # Expand the ~ to the home directory
 

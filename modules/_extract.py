@@ -8,6 +8,8 @@ import zipfile
 def extract():
     try:
         # Ask the user for the path to the ZIP archive they want to extract
+
+        click.echo(click.style('\n5) Extract Files', fg='magenta', bold=True))
         zip_filepath = click.prompt('Enter the path to the ZIP archive you want to extract', type=str)
 
         # Expand the ~ in the path to the home directory

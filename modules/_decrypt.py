@@ -8,6 +8,8 @@ from cryptography.fernet import Fernet
 def decrypt():
     try:
         # Ask the user for the directory containing the encrypted file
+
+        click.echo(click.style('\n3) Decrypt Files', fg='magenta', bold=True))
         directory = click.prompt('Enter the directory containing the encrypted file', type=click.Path(exists=False, file_okay=False, dir_okay=True))
         directory = os.path.expanduser(directory)  # Expand the ~ to the home directory
 

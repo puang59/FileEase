@@ -9,6 +9,7 @@ def manager():
     try:
         def folder_prompt():
             while True:
+                click.echo(click.style('\n1) Manage Files', fg='magenta', bold=True))
                 folder_path = click.prompt('What folder do you want to organize? (path) ')
                 folder_path = os.path.expanduser(folder_path)  # Expand the ~ to the home directory
                 if os.path.exists(folder_path) and os.path.isdir(folder_path):
@@ -49,6 +50,7 @@ def manager():
                         total_files += 1
 
 
+                # summary
                 total_files = click.style(f'{total_files-1} items', fg="magenta")
                 confirmation = get_yes_no_input(
                     f"\n{click.style('Summary: ', fg='cyan')}\n"
@@ -118,10 +120,11 @@ def manager():
             filename, extension = os.path.splitext(file)
             if extension.lower() in extensions_list:
                 total_files += 1
-
+         
+        # summary
         confirmation = get_yes_no_input(
             f"\n{click.style('Summary: ', fg='cyan')}\n"
-            f"Mode -> Keyword organizing ({keyword})\n"
+            f"Mode -> Extension organizing ({ extensions_prompt })\n"
             f"Folder -> {folder_path}\n"
             f"Master Folder -> {os.path.join(folder_path, keyword)}\n"
             f"Files -> {total_files-1} items\n\n"
