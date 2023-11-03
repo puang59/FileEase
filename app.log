@@ -46,3 +46,7 @@
 2023-11-01 17:50:44,738 - ERROR - 
 2023-11-01 17:50:57,562 - ERROR - 
 2023-11-01 17:51:06,638 - ERROR - 
+2023-11-02 19:15:40,027 - ERROR - 
+2023-11-02 19:17:34,539 - ERROR - 
+2023-11-03 11:12:14,883 - ERROR - cannot access local variable 'keyword' where it is not associated with a value
+2023-11-03 11:19:43,589 - ERROR - unsupported operand type(s) for /: 'str' and 'str'

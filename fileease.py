@@ -42,7 +42,7 @@ def main():
             display_menu()
             option = prompt('\nSelect an option (1/2/3/4/5)', type=IntRange(1, 5))
 
-            selected_function = options.get(option)
+            selected_function = options.get(option) 
             if selected_function:
                 selected_function()
             else:

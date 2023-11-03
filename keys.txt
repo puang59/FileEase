@@ -1,6 +1,0 @@
-
-[October 30, 07:00 PM] [wow.txt] -> ZeTJegx6rBvUDlmPex5f51OIjhbAtLxpzeUXl24Y7lE=
-[October 31, 02:07 PM] [wow.txt] -> _eYg3vt0JI3WBXoXipT-H2Hh1481HFlQPbER7jgyojg=
-[October 31, 02:10 PM] [main.c] -> Ld3_5qvDpL93uzgjKs_MX8CwpqWIB92-k4o3AJUIC5c=
-[October 31, 02:13 PM] [main.c] -> L2WIN6GWwHE1spLPi3Rs97rhO1g3f2wdeh0wLstNoPo=
-[October 31, 02:16 PM] [boeingRed.png] -> ObBAh4zvcnXclxuH89JuoqCfUJfYvdiS9nDI6ugmv9w=

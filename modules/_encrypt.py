@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from modules.validate.response import get_yes_no_input
 
 import click
 import os
@@ -62,17 +63,6 @@ def encrypt():
         encTitle = click.style("Encrption Key:", fg='red')
         click.echo(f"{encTitle} {key.decode()}")
 
-
-        def get_yes_no_input(question):
-            while True:
-                response = click.prompt(question)
-                if response.lower() in ("yes", "y"):
-                    return True
-                elif response.lower() in ("no", "n"):
-                    return False
-                else:
-                    print("Invalid input. Please enter 'yes' or 'no'.")
-        
         confirmation = get_yes_no_input(f'\nDo you want to store the key? ({click.style("yes", fg="green")}/{click.style("no", fg="red")})')
 
         now = datetime.now()

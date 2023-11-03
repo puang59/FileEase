@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from modules.validate.response import get_yes_no_input
 
 import os
 import shutil
@@ -14,7 +15,7 @@ def manager():
                 folder_path = os.path.expanduser(folder_path)  # Expand the ~ to the home directory
                 if os.path.exists(folder_path) and os.path.isdir(folder_path):
                     files = os.listdir(folder_path)
-                    return folder_path, files  # Return folder_path and files
+                    return folder_path, files
                 else:
                     print(f"The directory '{folder_path}' does not exist. Please try again.")
 
@@ -27,20 +28,9 @@ def manager():
             print(f"An error occurred: {str(e)}")
             return
 
-        # Defining yes/no checks
-        def get_yes_no_input(question):
-            while True:
-                response = click.prompt(question)
-                if response.lower() in ("yes", "y"):
-                    return True
-                elif response.lower() in ("no", "n"):
-                    return False
-                else:
-                    print("Invalid input. Please enter 'yes' or 'no'.")
-
         while True:
             organize_method = get_yes_no_input(f"Do you want keyword organizing? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
-            #For keyword mode 
+
             if organize_method:
                 keyword = click.prompt("Enter Keyword ")
                 master_folder_name = keyword
@@ -49,8 +39,6 @@ def manager():
                     if keyword.lower() in file.lower():
                         total_files += 1
 
-
-                # summary
                 total_files = click.style(f'{total_files-1} items', fg="magenta")
                 confirmation = get_yes_no_input(
                     f"\n{click.style('Summary: ', fg='cyan')}\n"
@@ -62,13 +50,12 @@ def manager():
                     f"{click.style('no', fg='red')}) "
                 )
 
-                
                 if not confirmation:
                     print("Terminating!!")
                     return
 
                 for file in files:
-                    if keyword.lower() in file.lower():  # Check if keyword is present in the file name
+                    if keyword.lower() in file.lower():
                         source_path = os.path.join(folder_path, file)
                         target_directory = os.path.join(folder_path, master_folder_name)
                         if os.path.isdir(source_path):
@@ -78,7 +65,7 @@ def manager():
                         click.echo(f"Moved {click.style(file, fg='magenta')} successfully")
 
                 click.echo(f"{click.style('Done! Files are organized by keyword ;>', fg='green')}")
-                return  # Exit without asking for extensions
+                return
 
             elif not organize_method:
                 break
@@ -95,7 +82,6 @@ def manager():
         extensions_list = [f".{ext.strip()}" for ext in extensions_split]
 
         diff_folder_prompt = get_yes_no_input(f"Do you want to create different folders for different extensions? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
-        # master_folder_name = None
         master_folder_name = ""
 
         if diff_folder_prompt:
@@ -121,12 +107,12 @@ def manager():
             if extension.lower() in extensions_list:
                 total_files += 1
          
-        # summary
         confirmation = get_yes_no_input(
             f"\n{click.style('Summary: ', fg='cyan')}\n"
-            f"Mode -> Extension organizing ({ extensions_prompt })\n"
+            f"Mode -> Extension organizing ({extensions_prompt})\n"
             f"Folder -> {folder_path}\n"
-            f"Master Folder -> {os.path.join(folder_path, keyword)}\n"
+            f"Master Folder -> {master_folder_name}\n"
+            # f"Master Folder -> {os.path.join(folder_path/master_folder_name)}\n"
             f"Files -> {total_files-1} items\n\n"
             f"Continue? ({click.style('yes', fg='green')}/"
             f"{click.style('no', fg='red')}) "
@@ -152,8 +138,7 @@ def manager():
         click.echo(f"{click.style('Done! Files are organized ;>', fg='green')}")
 
     except (FileNotFoundError, PermissionError) as e:
-        diff_folder_prompt = click.prompt(f"{click.style('Something went wrong!!!', fg='red')}\n\n")
-        click.echo(f"Traceback:\n {e}")
+        click.echo(f"{click.style('Error:', fg='red')} {str(e)}")
 
 if __name__ == '__main__':
     manager()
