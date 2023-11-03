@@ -6,6 +6,8 @@ import zipfile
 
 @click.command()
 def compress():
+    """ A module to compress files and folders """
+    
     try:
         # Ask the user for the directory containing the files to compress
 

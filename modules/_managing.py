@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from modules.validate.response import get_yes_no_input
+from validate.response import get_yes_no_input
 
 import os
 import shutil
@@ -7,6 +7,8 @@ import click
 
 @click.command()
 def manager():
+    """ A module to manage and organize your files and folders """
+
     try:
         def folder_prompt():
             while True:

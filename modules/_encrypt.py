@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from modules.validate.response import get_yes_no_input
+from validate.response import get_yes_no_input
 
 import click
 import os
@@ -12,6 +12,8 @@ cipher_suite = Fernet(key)
 
 @click.command()
 def encrypt():
+    """ A module to encrypt files and folders """
+    
     try:
         # Ask the user for the directory containing the file
 

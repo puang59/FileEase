@@ -6,6 +6,8 @@ import zipfile
 
 @click.command()
 def extract():
+    """ A module to extarct zipped files """
+    
     try:
         # Ask the user for the path to the ZIP archive they want to extract
 
