@@ -86,7 +86,7 @@ def manager():
         diff_folder_prompt = get_yes_no_input(f"Do you want to create different folders for different extensions? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
         master_folder_name = ""
 
-        if diff_folder_prompt:
+        def createMasterFolder(folder_path):
             master_folder_prompt = get_yes_no_input(f"Do you want to create {click.style('Master Folder', fg='yellow')}? ({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
             if master_folder_prompt:
                 master_folder_name = click.prompt("What would be the name of your Master folder?")
@@ -100,21 +100,25 @@ def manager():
                         return
                 else:
                     os.makedirs(check_master)
+            
+        if diff_folder_prompt:
+            createMasterFolder(folder_path)
         else:
-            master_folder_name = None
+            createMasterFolder(folder_path)
 
         total_files = 0
         for file in files:
             filename, extension = os.path.splitext(file)
             if extension.lower() in extensions_list:
                 total_files += 1
-         
+
+        if master_folder_name == None:
+            master_folder_name == "N/A"
         confirmation = get_yes_no_input(
             f"\n{click.style('Summary: ', fg='cyan')}\n"
             f"Mode -> Extension organizing ({extensions_prompt})\n"
             f"Folder -> {folder_path}\n"
             f"Master Folder -> {master_folder_name}\n"
-            # f"Master Folder -> {os.path.join(folder_path/master_folder_name)}\n"
             f"Files -> {total_files-1} items\n\n"
             f"Continue? ({click.style('yes', fg='green')}/"
             f"{click.style('no', fg='red')}) "
