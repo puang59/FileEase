@@ -23,7 +23,7 @@ def extract():
             return
 
         # Specify the extraction directory
-        extract_directory = click.prompt('Enter the directory to extract the files', type=click.Path(file_okay=False, dir_okay=True))
+        extract_directory = click.prompt('Enter the directory to extract the files in', type=click.Path(file_okay=False, dir_okay=True))
 
         # Expand the ~ in the path to the home directory
         extract_directory = os.path.expanduser(extract_directory)
@@ -34,7 +34,7 @@ def extract():
         with zipfile.ZipFile(zip_filepath, 'r') as zipf:
             zipf.extractall(extract_directory)
 
-        click.echo(f"Files from {zip_filepath} have been extracted to {extract_directory}")
+            click.echo(f"Files from {zip_filepath} have been extracted to {extract_directory}")
 
     except Exception as e:
         click.echo(f"Error: {str(e)}")
