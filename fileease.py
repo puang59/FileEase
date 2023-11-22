@@ -30,6 +30,7 @@ def display_menu():
 
 def main():
     try:
+        # loading extensions
         options = {
             1: manager,
             2: encrypt,
