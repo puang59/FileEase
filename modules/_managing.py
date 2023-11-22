@@ -41,7 +41,7 @@ def manager():
                     if keyword.lower() in file.lower():
                         total_files += 1
 
-                total_files = click.style(f'{total_files-1} items', fg="magenta")
+                total_files = click.style(f'{total_files} items', fg="magenta")
                 confirmation = get_yes_no_input(
                     f"\n{click.style('Summary: ', fg='cyan')}\n"
                     f"Mode -> Keyword organizing ({keyword})\n"
@@ -97,29 +97,30 @@ def manager():
                         f"({click.style('yes', fg='green')}/{click.style('no', fg='red')}) ")
                     if not overwrite_prompt:
                         print("Terminating!!")
-                        return
+                        return None
                 else:
                     os.makedirs(check_master)
-            
-        if diff_folder_prompt:
-            createMasterFolder(folder_path)
-        else:
-            createMasterFolder(folder_path)
+                return master_folder_name
+            return None
 
+        master_folder_name = createMasterFolder(folder_path)
+        diff_folder_prompt = master_folder_name is not None
+        
         total_files = 0
         for file in files:
             filename, extension = os.path.splitext(file)
             if extension.lower() in extensions_list:
                 total_files += 1
 
-        if master_folder_name == None:
-            master_folder_name == "N/A"
+        if master_folder_name is None:
+            master_folder_name = "N/A"
+
         confirmation = get_yes_no_input(
             f"\n{click.style('Summary: ', fg='cyan')}\n"
             f"Mode -> Extension organizing ({extensions_prompt})\n"
             f"Folder -> {folder_path}\n"
             f"Master Folder -> {master_folder_name}\n"
-            f"Files -> {total_files-1} items\n\n"
+            f"Files -> {total_files} items\n\n"
             f"Continue? ({click.style('yes', fg='green')}/"
             f"{click.style('no', fg='red')}) "
         )
@@ -137,6 +138,9 @@ def manager():
                         target_directory = os.path.join(folder_path, master_folder_name, extension[1:])
                     else:
                         target_directory = os.path.join(folder_path, extension[1:])
+                else:
+                    target_directory = folder_path
+
                 os.makedirs(target_directory, exist_ok=True)
                 shutil.move(os.path.join(folder_path, file), os.path.join(target_directory, file))
                 click.echo(f"Moved {click.style(file, fg='magenta')} successfully")
