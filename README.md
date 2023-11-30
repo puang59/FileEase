@@ -1,10 +1,10 @@
 <p align="left">
-  <img src="media/Logo.png" alt="FileEase Logo" width="600">
+  <img src="media/logo.png" alt="FileEase Logo" width="600">
 </p>
 
 <hr>
 
-FileEase is a command-line tool designed to simplify the organization of your files. It effortlessly sorts your files based on keywords and extensions, ensuring your digital workspace is tidy and efficient.
+FileEase is a command-line tool designed to simplify the organization of your files. It effortlessly sorts your files based on keywords and extensions, ensuring your digital workspace is tidy and efficient. FileEase also helps you to encrypt and compress your files easily from your command line.
 
 <p align="left">
   <img src="media/preview.png" alt="preview" width="500">
@@ -12,23 +12,26 @@ FileEase is a command-line tool designed to simplify the organization of your fi
 
 ## Features
 
-- **Manage Files
-    - ***Keyword-Based Organization**: FileEase automatically creates folders with specified keywords and moves files containing those keywords in their names to the respective folders. For example, if you have files with "screenshot" in their names, FileEase will create a "screenshot" folder and neatly organize them for you.
+### Manage Files
+- **Keyword-Based Organization:** FileEase automatically creates folders with specified keywords and moves files containing those keywords in their names to the respective folders. For example, if you have files with "screenshot" in their names, FileEase will create a "screenshot" folder and neatly organize them for you.
+  ![Keyword Mode Screenshot](media/keyword.png)
 
-    - ***Extension-Based Sorting**: If you prefer to sort files by their extensions, FileEase can create folders for different file extensions and categorize your files accordingly. For instance, all your PNG files will be grouped together in a "png" folder, while MOV files will have their own "mov" folder.
+- **Extension-Based Sorting:** If you prefer to sort files by their extensions, FileEase can create folders for different file extensions and categorize your files accordingly. For instance, all your PNG files will be grouped together in a "png" folder, while MOV files will have their own "mov" folder.
+  ![Extension Mode Screenshot](media/manage.png)
 
-## Screenshots
+### Encryption & Decryption
+- **File Encryption:** FileEase effortlessly secures files, whether they're PDFs, PPTX, or images, providing an encryption key for secure storage in keys.txt, ensuring easy decryption when needed.
+  ![Encryption Screenshot](media/encrypt.png)
 
-### Keyword Mode
-<p align="left">
-  <img src="media/keywordMode.png" alt="Keyword Mode Screenshot" width="500">
-</p>
+- **File Decryption:** FilEase can decrypt any type of file if a valid key is provided
+  ![Decrypt Screenshot](media/decrypt.png)
 
-### Extension Mode
-<p align="left">
-  <img src="media/extensionMode.png" alt="Extension Mode Screenshot" width="500">
-</p>
+### Compress & Extract
+- **File Compression:** Filease ease can effortlessly compress your files and folders right from your command line.
+    ![Compress Screenshot](media/compress.png)
 
+- **File Extraction:** Filease ease can effortlessly extract your files and folders right from your command line.
+  
 <hr>
 
 ## Getting Started
@@ -55,3 +58,5 @@ We welcome contributions from the open-source community. Feel free to [fork this
 ## License
 
 This project is open-source under the [MIT License](LICENSE). While you're free to view, use, and contribute to the code, please refrain from distributing it as your own. 
+<br><br>
+Made with ❤️ by Karan and Prajul
