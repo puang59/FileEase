@@ -10,6 +10,15 @@ FileEase is a command-line tool designed to simplify the organization of your fi
   <img src="media/preview.png" alt="preview" width="500">
 </p>
 
+Video Demo: https://youtu.be/AwcSrI3sijQ?si=2f3wi8B29QBmd5aV
+
+## Overview
+This project consists of main fileease.py file which loads all the modules from module folder like managing, encryption, compression etc
+Here is short overview about each modules: 
+
+- _managing.py 
+This script employs the click library to create a streamlined command-line interface (CLI) for user interaction. It leverages Python's standard libraries such as os for file and directory operations and shutil for file movements. The script employs a structured approach: it first allows users to select a directory for organization, then presents choices for categorizing files based on either keywords or extensions. For each categorization method, users have the flexibility to either organize files directly in the chosen directory or encapsulate them within a designated "Master Folder". This logic ensures a systematic and customizable file organization process.
+
 ## Features
 
 ### Manage Files
@@ -59,4 +68,4 @@ We welcome contributions from the open-source community. Feel free to [fork this
 
 This project is open-source under the [MIT License](LICENSE). While you're free to view, use, and contribute to the code, please refrain from distributing it as your own. 
 <br><br>
-Made with ❤️ by Karan and Prajul
+Made with ❤️ by Karan 
